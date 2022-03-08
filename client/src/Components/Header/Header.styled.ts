@@ -7,7 +7,7 @@ export const HeaderStyled = styled.header`
   padding: 10px 0;
   position: absolute;
   left: 0;
-  right: 0;
+  margin-right: 0px;
 `;
 
 export const HomeLogoStyled = styled.img`

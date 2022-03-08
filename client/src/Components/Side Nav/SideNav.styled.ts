@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 
 export const SideNavStyled = styled.div`
-  left: 0;
-  bottom: 0;
   float: left;
-  background-color: rgb(137, 137, 204);
-  top: 150px;
-  height: 100%;
+  top: 95px;
+  position: absolute;
+  width: 16%;
+
   a {
     padding: 6px 8px 6px 15px;
     text-decoration: none;
@@ -14,10 +13,12 @@ export const SideNavStyled = styled.div`
     font-weight: 400;
     color: black;
     display: block;
+    color: rgb(80, 182, 216);
+    font-weight: 800;
   }
 
   a:hover {
-    color: rgb(80, 182, 216);
+    color: rgb(137, 137, 204);
   }
   li,
   ul {
@@ -28,5 +29,7 @@ export const SideNavStyled = styled.div`
 `;
 
 export const SideNavHeader = styled.h3`
-  text-align: center;
+  margin-left: 6%;
+  font-weight: 800;
+  color: rgb(137, 137, 204);
 `;

@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { FooterPara, FooterStyled } from './Footer.styled';
 
-const Footer = () => {
+const Footer: FC = () => {
   return (
     <>
       <FooterStyled>
         <FooterPara>
-          All prices are in euros (€) including statutory sales tax and shipping
-          costs.
+          Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und
+          Versandkosten.
         </FooterPara>
       </FooterStyled>
     </>
   );
 };
-
 export default Footer;

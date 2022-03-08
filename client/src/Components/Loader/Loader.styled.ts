@@ -1,19 +1,20 @@
-@keyframes spin {
-  0% {
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+
+export const LoadingAnimation = keyframes` 0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
-  }
-}
+  }`;
 
-.loader-container {
-  animation: spin 1s linear infinite;
+export const LoaderStyled = styled.div`
+  animation: ${LoadingAnimation} 1s linear infinite;
   transform: translateZ(0);
   border-top: 2px solid white;
   border-right: 2px solid white;
   border-bottom: 2px solid white;
-  border-left: 4px solid rgb(12, 108, 242);
+  border-left: 4px solid rgb(137, 137, 204);
   background: transparent;
   width: 50px;
   height: 50px;
@@ -22,9 +23,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-}
+`;
 
-#page-overlay {
+export const Overlay = styled.div`
   background: none repeat scroll 0 0 black;
   position: fixed;
   display: block;
@@ -34,4 +35,4 @@
   top: 0;
   height: 100%;
   width: 100%;
-}
+`;

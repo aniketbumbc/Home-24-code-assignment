@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { fetchQuery } from '../graphQL/query';
 import { getErrorMessage } from '../utils/utils';
 
 export const useFetch = () => {
@@ -9,63 +10,35 @@ export const useFetch = () => {
   useEffect(() => {
     const fetchData = () => {
       setLoading(true);
-      try {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/graphql');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(
-          JSON.stringify({
-            query: `{
-              categories(ids: "156126", locale: de_DE) {
-                name
-                articleCount
-                childrenCategories {
-                  name
-                  urlPath
-                }
-                categoryArticles(first: 50) {
-                  articles {
-                    name
-                    variantName
-                    prices {
-                      currency
-                      regular {
-                        value
-                      }
-                    }
-                    images(
-                      format: WEBP
-                      maxWidth: 200
-                      maxHeight: 200
-                      limit: 1
-                    ) {
-                      path
-                    }
-                  }
-                }
-              }
-            }`,
-          })
-        );
 
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            const categoriesResp = JSON.parse(xhr.response);
-            setLoading(false);
-            setProductsData(categoriesResp.data.categories);
-          } else {
-            throw new Error(
-              `Something Went Wrong, ${xhr.status} ${xhr.statusText}`
-            );
-          }
-        };
-      } catch (error) {
-        setLoading(false);
-        console.error(error);
-        setError(getErrorMessage(error));
-      }
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/graphql');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(
+        JSON.stringify({
+          query: fetchQuery,
+        })
+      );
+
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const categoriesResp = JSON.parse(xhr.response);
+
+          setLoading(false);
+          setProductsData(categoriesResp.data.categories);
+        } else {
+          setLoading(false);
+          setError(
+            getErrorMessage(
+              ` Something Went Wrong ,${xhr.status} ${xhr.statusText}`
+            )
+          );
+          throw new Error(
+            `Something Went Wrong, ${xhr.status} ${xhr.statusText}`
+          );
+        }
+      };
     };
-
     fetchData();
   }, []);
 

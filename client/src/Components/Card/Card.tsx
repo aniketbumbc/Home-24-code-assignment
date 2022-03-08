@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { Article } from '../../@types/types';
 import { articlePerPage } from '../../constant /constant';
 import { formatter } from '../../utils/utils';
 import Pagination from '../Pagination/Pagination';
@@ -14,18 +15,18 @@ import {
 
 export interface CardProps {
   articleCount: number;
-  articles: any;
+  articles: Article[];
   name: string;
 }
 
 const Card: FC<CardProps> = ({ articleCount, articles, name }) => {
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const pagesVisited = pageNumber * articlePerPage;
+  const pagesVisited: number = pageNumber * articlePerPage;
 
   const showArticles = articles.length ? (
     articles
       .slice(pagesVisited, pagesVisited + articlePerPage)
-      .map((article: any, index: number) => (
+      .map((article: Article, index: number) => (
         <CardStyled key={article.name + index}>
           <CardImageStyled>
             <img src={article.images[0].path} alt={article.name} />

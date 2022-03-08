@@ -1,55 +1,50 @@
 import React, { FC, useState, useEffect } from 'react';
-import { useFetch } from '../../Hooks/useFetch';
-import Loader from '../../Loader/Loader';
+import { Article } from '../../@types/types';
 import { getFilterSeachResult } from '../../utils/utils';
+import { useFetch } from '../../Hooks/useFetch';
+import { Input } from './SearchInput.styled';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import Loader from '../Loader/Loader';
 import Card from '../Card/Card';
 import SideNav from '../Side Nav/SideNav';
-import { Input } from './SearchInput.styled';
-
-interface SearchInputProps {
-  articleCount: number;
-  categoryArticles: any;
-  name: string;
-}
 
 const SearchInput: FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [filterData, setFilterData] = useState<any[]>([]);
+  const [filterData, setFilterData] = useState<Article[]>([]);
   const { productsData, loading, error } = useFetch();
-  let debounceTimer: any;
 
   const { articleCount, categoryArticles, childrenCategories, name } =
     productsData?.length && [...productsData].shift();
 
   useEffect(() => {
-    let tempFilterData: any[] = [];
+    let tempArticles: Article[] = [];
     if (categoryArticles && categoryArticles.articles) {
-      tempFilterData = getFilterSeachResult(
+      tempArticles = getFilterSeachResult(
         categoryArticles.articles,
         searchValue
       );
     }
-    setFilterData(tempFilterData);
-  }, [searchValue, productsData]);
+    setFilterData(tempArticles);
+  }, [searchValue, productsData, categoryArticles]);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      setSearchValue(value);
-    }, 200);
+    setSearchValue(value);
   };
   return (
     <>
+      {!!error.length && !loading && <ErrorBoundary error={error} />}
+
       {loading && !productsData?.length && <Loader />}
 
       <Input
         type='text'
         placeholder='Search'
+        data-testid='search-input'
         value={searchValue}
         onChange={handleOnChange}
       />
-      {productsData && productsData.length && (
+      {productsData && !!productsData.length && (
         <>
           <SideNav childrenCategories={childrenCategories} />
           <Card articleCount={articleCount} articles={filterData} name={name} />

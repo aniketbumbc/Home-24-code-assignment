@@ -111,6 +111,7 @@ export const BuyButtonStyled = styled.button`
 
 export const CardHeaderStyled = styled.h1`
   margin-left: 15%;
+  color: rgb(137, 137, 204);
 `;
 
 export const CardNotFound = styled.h1`

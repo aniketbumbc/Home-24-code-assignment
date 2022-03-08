@@ -1,22 +1,25 @@
 import React, { FC } from 'react';
-import Card from '../Card/Card';
+import { ChildCategory } from '../../@types/types';
 import { SideNavStyled, SideNavHeader } from './SideNav.styled';
 
 interface SideNavProps {
-  childrenCategories: any;
+  childrenCategories: ChildCategory[];
 }
 
 const SideNav: FC<SideNavProps> = ({ childrenCategories }) => {
   return (
     <>
       <SideNavStyled>
-        <SideNavHeader> Kategorien </SideNavHeader>
+        <SideNavHeader aria-labelledby='categories-heading'>
+          {' '}
+          Kategorien{' '}
+        </SideNavHeader>
 
         {childrenCategories &&
-          true &&
-          childrenCategories.map((category: any) => {
+          !!childrenCategories.length &&
+          childrenCategories.map((category: ChildCategory) => {
             return (
-              <ul key={category.name}>
+              <ul key={category.name} aria-labelledby='categories-heading'>
                 <li>
                   <a href={`/${category.urlPath}`}>{category.name}</a>
                 </li>

@@ -1,3 +1,5 @@
+import { Article } from '../@types/types';
+
 /**
  *  Convert error into error message
  * @param error
@@ -9,21 +11,20 @@ export const getErrorMessage = (error: unknown): string => {
 };
 
 const intlNumberFormatValues = ['de-DE', 'currency', 'EUR'];
-
 export const formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
   style: intlNumberFormatValues[1],
   currency: intlNumberFormatValues[2],
 });
 
 export const getFilterSeachResult = (
-  articlesData: any[],
+  articlesData: Article[],
   searchValue: string
-): any[] => {
+): Article[] => {
   if (!searchValue.length) {
     return articlesData;
   }
-  const lowerCaseSearchValue = searchValue.toLocaleLowerCase();
-  return articlesData.filter((article: any) =>
+  const lowerCaseSearchValue: string = searchValue.toLocaleLowerCase();
+  return articlesData.filter((article: Article) =>
     article.name.toLocaleLowerCase().includes(lowerCaseSearchValue)
   );
 };
