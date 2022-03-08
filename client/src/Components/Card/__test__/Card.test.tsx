@@ -45,10 +45,10 @@ describe('Card Component', () => {
     render(
       <Card articleCount={articleCount} name={name} articles={articles} />
     );
-    const loginButton = screen.getAllByText(/Add to Cart/i, {
+    const addToCartBtns = screen.getAllByText(/Add to Cart/i, {
       selector: 'button',
     });
-    expect(loginButton.length).toBe(2);
+    expect(addToCartBtns.length).toBe(2);
   });
 
   test('Should render correct product price.', () => {
