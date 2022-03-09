@@ -42,8 +42,7 @@ const Card: FC<CardProps> = ({ articleCount, articles, name }) => {
       ))
   ) : (
     <CardNotFound>
-      {' '}
-      Product not found, Please search different text!!!{' '}
+      Produkt nicht gefunden, bitte suchen Sie nach einem anderen Text!!!
     </CardNotFound>
   );
 

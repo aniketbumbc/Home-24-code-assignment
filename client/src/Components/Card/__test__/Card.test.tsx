@@ -4,7 +4,7 @@ import Card from '../Card';
 import { articleCount, name, articles } from '../../../Test Data/testData';
 
 describe('Card Component', () => {
-  test('Should render correct header text.', () => {
+  test('Should render correct header text with article count.', () => {
     render(
       <Card articleCount={articleCount} name={name} articles={articles} />
     );
@@ -51,7 +51,7 @@ describe('Card Component', () => {
     expect(addToCartBtns.length).toBe(2);
   });
 
-  test('Should render correct product price.', () => {
+  test('Should render correct products price.', () => {
     render(
       <Card articleCount={articleCount} name={name} articles={articles} />
     );

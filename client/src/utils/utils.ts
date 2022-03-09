@@ -1,4 +1,9 @@
 import { Article } from '../@types/types';
+import {
+  portalCurrency,
+  portalLanguage,
+  portalStyle,
+} from '../constant /constant';
 
 /**
  *  Convert error into error message
@@ -10,10 +15,9 @@ export const getErrorMessage = (error: unknown): string => {
   return String(error);
 };
 
-const intlNumberFormatValues = ['de-DE', 'currency', 'EUR'];
-export const formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
-  style: intlNumberFormatValues[1],
-  currency: intlNumberFormatValues[2],
+export const formatter = new Intl.NumberFormat(portalLanguage, {
+  style: portalStyle,
+  currency: portalCurrency,
 });
 
 export const getFilterSeachResult = (

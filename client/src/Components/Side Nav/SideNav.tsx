@@ -10,16 +10,13 @@ const SideNav: FC<SideNavProps> = ({ childrenCategories }) => {
   return (
     <>
       <SideNavStyled>
-        <SideNavHeader aria-labelledby='categories-heading'>
-          {' '}
-          Kategorien{' '}
-        </SideNavHeader>
+        <SideNavHeader> Kategorien </SideNavHeader>
 
         {childrenCategories &&
           !!childrenCategories.length &&
           childrenCategories.map((category: ChildCategory) => {
             return (
-              <ul key={category.name} aria-labelledby='categories-heading'>
+              <ul key={category.name}>
                 <li>
                   <a href={`/${category.urlPath}`}>{category.name}</a>
                 </li>

@@ -23,19 +23,13 @@ export const useFetch = () => {
       xhr.onload = () => {
         if (xhr.status === 200) {
           const categoriesResp = JSON.parse(xhr.response);
-
           setLoading(false);
           setProductsData(categoriesResp.data.categories);
         } else {
+          const showError = ` Something Went Wrong ,${xhr.status} ${xhr.statusText}`;
           setLoading(false);
-          setError(
-            getErrorMessage(
-              ` Something Went Wrong ,${xhr.status} ${xhr.statusText}`
-            )
-          );
-          throw new Error(
-            `Something Went Wrong, ${xhr.status} ${xhr.statusText}`
-          );
+          setError(getErrorMessage(showError));
+          throw new Error(showError);
         }
       };
     };
